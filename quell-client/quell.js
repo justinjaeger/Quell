@@ -3,9 +3,9 @@ const { visit } = require('graphql/language/visitor')
 
 module.exports = class Quell {
   constructor(query, map) {
+    this.AST = parse(this.query);
     this.query = query;
     this.map = map;
-    this.AST = parse(this.query);
     this.proto = this.parseAST(this.AST);
   }
 

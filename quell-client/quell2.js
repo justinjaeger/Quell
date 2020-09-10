@@ -1,4 +1,4 @@
-const { parse } = require('graphql/language/parser')
+// const { parse } = require('graphql/language/parser')
 const { visit } = require('graphql/language/visitor')
 
 module.exports = class Quell {
@@ -88,55 +88,55 @@ module.exports = class Quell {
   return prototype;
   }
 
-  // buildFromCache() {
-  //   /** Helper function that loops over a collection of references,
-  //    *  calling another helper function -- buildItem() -- on each. Returns an
-  //    *  array of those collected items.
-  //    */
-  //   function buildArray(prototype, map, collection) {
-  //     let response = [];
+  buildFromCache() {
+    /** Helper function that loops over a collection of references,
+     *  calling another helper function -- buildItem() -- on each. Returns an
+     *  array of those collected items.
+     */
+    function buildArray(prototype, map, collection) {
+      let response = [];
       
-  //     for (let query in prototype) {
-  //       collection = collection || dummyCache[map[query]];
-  //       for (let item of collection) {
-  //         response.push(buildItem(prototype[query], dummyCache[item]))
-  //       }
-  //     }
+      for (let query in prototype) {
+        collection = collection || dummyCache[map[query]];
+        for (let item of collection) {
+          response.push(buildItem(prototype[query], dummyCache[item]))
+        }
+      }
       
-  //     return response;
-  //   };
+      return response;
+    };
     
-  //   /** Helper function that iterates through keys -- defined on passed-in
-  //    *  prototype object, which is always a fragment of this.proto, assigning
-  //    *  to tempObj the data at matching keys in passed-in item. If a key on 
-  //    *  the prototype has an object as its value, buildArray is
-  //    *   recursively called.
-  //    * 
-  //    *  If item does not have a key corresponding to prototype, that field
-  //    *  is toggled to false on prototype object. Data for that field will
-  //    *  need to be queried.
-  //    * 
-  //    */
+    /** Helper function that iterates through keys -- defined on passed-in
+     *  prototype object, which is always a fragment of this.proto, assigning
+     *  to tempObj the data at matching keys in passed-in item. If a key on 
+     *  the prototype has an object as its value, buildArray is
+     *   recursively called.
+     * 
+     *  If item does not have a key corresponding to prototype, that field
+     *  is toggled to false on prototype object. Data for that field will
+     *  need to be queried.
+     * 
+     */
 
-  //   function buildItem(prototype, item) {
+    function buildItem(prototype, item) {
       
-  //     let tempObj = {};
+      let tempObj = {};
       
-  //     for (let key in prototype) {
-  //       if (typeof prototype[key] === 'object') {
-  //         let prototypeAtKey = {[key]: prototype[key]}
-  //         tempObj[key] = buildArray(prototypeAtKey, map, item[key])
-  //       } else if (prototype[key]) {
-  //         if (item[key] !== undefined) {
-  //           tempObj[key] = item[key];
-  //         } else {
-  //           prototype[key] = false;
-  //         }
-  //       }
-  //     }
-  //     return tempObj;
-  //   }
+      for (let key in prototype) {
+        if (typeof prototype[key] === 'object') {
+          let prototypeAtKey = {[key]: prototype[key]}
+          tempObj[key] = buildArray(prototypeAtKey, map, item[key])
+        } else if (prototype[key]) {
+          if (item[key] !== undefined) {
+            tempObj[key] = item[key];
+          } else {
+            prototype[key] = false;
+          }
+        }
+      }
+      return tempObj;
+    }
 
-  //   return buildArray(this.proto, map);
-  //   }
+    return buildArray(this.proto, map);
+    }
 };
