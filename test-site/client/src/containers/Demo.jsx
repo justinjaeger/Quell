@@ -1,10 +1,13 @@
 import React, { useState, useRef } from 'react'; // Remove useRef to remove default
 import QueryInput from '../components/QueryInput';
 import DemoInput from './DemoInput';
+import DemoButton from '../components/DemoButton'
 import ButtonRunQuery from '../components/ButtonRunQuery';
+import ButtonReset from '../components/ButtonReset'
+import ButtonClearSessionCache from '../components/ButtonClearSessionCache';
+import ButtonClearServerCache from '../components/DemoButton';
 import QueryResults from '../components/QueryResults';
 import Metrics from '../components/Metrics';
-import ButtonClearCache from '../components/ButtonClearCache';
 import Graph from '../components/Graph';
 import Quell from '../../../../quell-client/Quellify';
 import {
@@ -100,10 +103,18 @@ const Demo = () => {
           handleChange={handleChange}
         /> */}
         <DemoInput output={output} setOutput={setOutput} />
-        <ButtonRunQuery handleRunQueryClick={handleRunQueryClick} />
         <QueryResults queryResponse={queryResponse} />
         <Metrics fetchTime={fetchTime} cacheStatus={cacheStatus} />
-        <ButtonClearCache handleClearCacheClick={handleClearCacheClick} />
+        <div className="button-grid">
+          <DemoButton text={'Run Query'} func={handleRunQueryClick} classname={'button-query button-query-primary'} />
+          <DemoButton text={'Clear Session Cache'} func={handleClearCacheClick} classname={'button-query button-query-secondary'}/>
+          <DemoButton text={'Clear Server Cache'} func={handleClearCacheClick} classname={'button-query button-query-secondary'}/>
+          <DemoButton text={'Reset All'} func={handleClearCacheClick} classname={'button-query button-query-secondary'}/>
+          {/* <ButtonRunQuery handleRunQueryClick={handleRunQueryClick} />
+          <ButtonClearSessionCache handleClearCacheClick={handleClearCacheClick} />
+          <ButtonClearServerCache />
+          <ButtonReset /> */}
+        </div>
         <Graph fetchTimeIntegers={fetchTimeIntegers} />
       </div>
     </div>

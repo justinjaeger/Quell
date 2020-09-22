@@ -96,6 +96,7 @@ const DemoInput = (props) => {
         {space}
         {/* Dropdown appears on click */}
         <span>
+          {space}{space}
           <button
             className='dropdown-button'
             onClick={() => toggleDropdown(!queryDropdown)}
@@ -108,7 +109,6 @@ const DemoInput = (props) => {
             {queryDropdown && <div className="dropdown-menu" ref={ref}>{dropdownMenu}</div>}
           </button>
         </span>
-        {tab}
         {query}
 
         {/* Id Dropdown (conditional) */}

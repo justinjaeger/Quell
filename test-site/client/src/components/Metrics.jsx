@@ -1,9 +1,6 @@
 import React from 'react';
 import Tooltip from '@material-ui/core/Tooltip';
 
-
-
-
 const Metrics = (props) => {
   const { fetchTime, cacheStatus } = props;
   return(

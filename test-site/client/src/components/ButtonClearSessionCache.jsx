@@ -1,15 +1,15 @@
 import React from 'react';
 
-const ButtonClearCache = (props) => {
+const ButtonClearSessionCache = (props) => {
   const { handleClearCacheClick } = props;
   return(
     <div className="button-cache-div">
         <button 
-          className="button-cache" 
+          className="button-query" 
           onClick={handleClearCacheClick}
-        >Clear Cache</button>
+        >Clear Session Cache</button>
     </div>
   )
 }
 
-export default ButtonClearCache;
+export default ButtonClearSessionCache;

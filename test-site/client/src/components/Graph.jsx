@@ -5,7 +5,7 @@ const Graph = (props) => {
   const { fetchTimeIntegers } = props;
   return(
     <div className="graph-div">
-      <h3>Speed Graph:</h3>
+      <h3>Response Speed:</h3>
       <Trend
         className="trend"
         // smooth
@@ -13,9 +13,9 @@ const Graph = (props) => {
         // autoDrawDuration={3000}
         // autoDrawEasing="ease-out"
         data={fetchTimeIntegers}
-        gradient={['#1feaea', '#ffd200', '#f72047']}
+        gradient={['#7dd0e9', '#40677a', '#082032']}
         radius={0.9}
-        strokeWidth={3.2}
+        strokeWidth={4}
         strokeLinecap={'round'}
       />
     </div>

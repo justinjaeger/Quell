@@ -6,7 +6,7 @@ const TeamMember = (props) => {
   const { src, bio, name, linkedin, github } = props;
 
   return (
-    <div className='profile-pics'>
+    <div className='profile'>
       <img src={src} alt='Quell Team'></img>
       <p className='team-member-name'>{name}</p>
       <p>{bio}</p>

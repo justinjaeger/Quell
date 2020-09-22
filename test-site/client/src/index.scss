@@ -51,6 +51,10 @@ header {
 }
 
 .header-links {
+  max-width: 800px;
+  margin: auto;
+  left: 50%;
+  right: 50%;
   display: flex;
   justify-content: space-around;
   list-style-type: none;
@@ -91,6 +95,10 @@ header {
 
 .info-container {
   display: flex;
+  max-width: 800px;
+  margin: auto;
+  left: 50%;
+  right: 50%;
   flex-direction: column;
   justify-content: center;
   padding: 0 10px;
@@ -137,35 +145,6 @@ margin: 50px auto;
   margin: 20px auto;
 }
 
-// .query-div-title {
-//   font-size: 2em;
-// }
-
-.dashboard-grid {
-  border-radius: 5px;
-  // margin-top: 5vh;
-  padding: 10px;
-}
-
-.query-div {
-  font-size: 25px;
-  background-color: white;
-  font-family: "Avenir";
-  letter-spacing: 5px;
-  color: $quell-darkest;
-}
-
-.dashboard-grid > div {
-  // background-color: $off-white;
-  border: 1px solid $quell-darkest;
-  border-radius: 5px;
-  color: $quell-darkest;
-  padding: 10px;
-  font-family: "Avenir";
-  // letter-spacing: 5px;
-}
-
-.timer-div,
 .cache-storage-div {
   font-family: "Rubik", sans-serif;
   background: white;
@@ -189,57 +168,43 @@ textarea {
   padding: 10px;
 }
 
-.button-cache,
-
 /* Button - Run Query */
 .button-query {
-  font-size: 20px;
+  margin: 0px, 10px;
+  border: none !important;
+  padding: 0 !important;
+  font-size: 16px;
   font-weight: bold;
-  color: #FFF;
-  // color: $quell-darkest;
   border-radius: 3px;
-  border: 1px solid $quell-darkest;
-  // border:none;
-  width: 100%;
-  height: 50px;
-  // margin: 10px 0;
-  padding: 5px;
-  outline: none;
-  background: $quell-medium;
+  height:90%;
 }
-
 .button-query:hover {
-  background: $quell-dark;
   cursor: pointer;
 }
-
-.button-query:active {
-  // background: $quell-lightest;
-}
-
-/* Button - Clear Cache */
-.button-cache {
-  border: 1px solid $quell-darkest;
+.button-query-primary {
+  color: #FFF;
   background: $quell-medium;
 }
-
-.button-cache:hover {
-  background: $quell-dark;
-  cursor: pointer;
+.button-query-primary:hover {
+  background: $quell-dark !important;
 }
-
-.button-cache:active {
-  background: $quell-dark;
+.button-query-secondary {
+  color: $quell-medium;
+  border: 3px solid $quell-medium !important;
+  // border-radius: 3px !important;
+  background: #FFF;
+}
+.button-query-secondary:hover {
+  color: #FFF;
+  border: 3px solid $quell-dark !important;
+  background: $quell-dark !important;
 }
 
 /* Button - Query playground */
 .dropdown-button {
   padding-left: 10px;
   border-radius: 50%;
-  // background-color: limegreen;
-  // height: 15px;
-  // width: 15px;
-  position: absolute;
+  position: relative;
   background-color: white;
   outline: none;
   border: none;
@@ -351,11 +316,11 @@ textarea {
 }
 
 .results-view {
-  background: #3c3c3c;
-  color: #85e6e1;
+  background: $quell-darkest;
+  color: $quell-lightest;
   font-size: 16px;
   border: 1px solid #2c2c2eff;
-  border-radius: 2px;
+  border-radius: 5px;
   width: 100%;
   height: 30vh;
   padding: 10px;
@@ -375,26 +340,41 @@ textarea {
 
 // ====== TEAM SECTION ======
 
-#team-quell {
+#team-quell { /* header image */
+  display: block;
+  margin: auto;
+  left: 50%;
+  right: 50%;
+  max-width: 450px;
+  align-items: center;
+  justify-content: center;
   width: 60%;
   padding: 2%;
+  padding-top: 100px;
   margin-bottom: 10%;
 }
 
-#team {
-  display: flex;
+#team-profiles {
+  margin: auto;
+  left: 50%;
+  right: 50%;
   flex-direction: column;
   align-items: center;
   font-size: 18px;
+  max-width: 1000px;
+  // height: 600px;
+  display: flex;
+  // display: grid;
+  // grid-template-columns: 1fr 1fr;
 }
 
-.profile-pics {
+.profile {
   width: 45%;
-  // max-width: 400px;
+  max-width: 250px;
   margin-bottom: 4%;
 }
 
-.profile-pics img {
+.profile img {
   margin-bottom: 4%;
 }
 
@@ -431,25 +411,23 @@ textarea {
     margin: 40px auto;
   }
 
-
-
   .quell-graph-container {
     max-width: 700px;
     
     
-    }
+  }
+  
+  .quell-puzzle-container {
+    max-width: 700px;
     
-    .quell-puzzle-container {
-      max-width: 700px;
-      
-    }
+  }
 
-    .quell-airmail-container {
-      max-width: 700px;
-      
-    }
+  .quell-airmail-container {
+    max-width: 700px;
+    
+  }
 
-  // ====== DEMO SECTION ======
+  // ====== DEMO SECTION ====== //
 
   #demo {
     margin-bottom: 50px;
@@ -461,47 +439,78 @@ textarea {
 
   /* Dashboard Grid */
   .dashboard-grid {
-    // display: flex;
+    border-radius: 5px;
+    // padding: 10px;
+    max-width: 600px;
+    margin: auto;
+    left: 50%;
+    right: 50%;
     display: grid;
-    grid-template: auto/repeat(2, 1fr);
-    grid-gap: 10px;
-    grid-template-areas:
+    grid-template: 
+      "button-grid button-grid"
       "query metrics"
-      "button-query button-cache"
       "results graph";
+    grid-template-columns: 5fr 3fr;
+  }
+  
+  .dashboard-grid > div {
+    border: 1px solid $quell-darkest;
+    border-radius: 5px;
+    // padding: 10px;
+    font-family: "Avenir";
+    // color: $quell-darkest;
   }
 
   /* dashboard divs */
   .query-div {
+    padding: 20px;
+    overflow: scroll;
+    height: 400px;
     grid-area: query;
+    font-size: 25px;
+    background-color: white;
+    font-family: "Avenir";
+    letter-spacing: 2px;
+    color: $quell-darkest;
+    // margin-top: 10px;
+    margin-bottom: 20px;
+    margin-right: 10px;
   }
 
-  .button-query-div {
-    grid-area: button-query;
+  .metrics-div {
+    background-color: $quell-dark;
+    // color: $quell-darkest;
+    color: #FFF;
     border: none !important;
-    padding: 0 !important;
+    padding: 10px;
+    grid-area: metrics;
+    margin-bottom: 20px;
+  }
+
+  .button-grid {
+    padding: 5px;
+    height: 80px;
+    grid-area: button-grid;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    column-gap: 10px;
+    border: none !important;
   }
 
   .results-div {
     grid-area: results;
-  }
-
-  .metrics-div {
-    grid-area: metrics;
-  }
-
-  .button-cache-div {
-    grid-area: button-cache;
+    padding-right: 10px;
     border: none !important;
-    padding: 0 !important;
   }
 
   .graph-div {
+    border: none !important;
     grid-area: graph;
   }
 
   /* Metrics Grid */
   .metrics-grid {
+    height: 50px;
     display: grid;
     grid-template: auto/repeat(2, 1fr);
     grid-gap: 10px;
@@ -516,14 +525,4 @@ textarea {
     grid-area: cache-storage-div;
   }
 
-  // ====== TEAM SECTION ======
-
-  #team-quell {
-    max-width: 450px;
-    margin-bottom: 50px;
-  }
-
-  .profile-pics {
-    max-width: 250px;
-  }
 }

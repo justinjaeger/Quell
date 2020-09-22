@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import QueryItem from './QueryItem.jsx';
 import DropdownItem from './DropdownItem.jsx';
+import RecursiveCall from './RecursiveCall.jsx';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import Minus from '../images/buttons/minus-button.svg';
 import MinusHover from '../images/buttons/minus-button-hover.svg';
@@ -143,11 +144,10 @@ const QueryDisplay = (props) => {
             {space}cities{space}{ob} 
           </div>
           <div className='queryLine'>
-            <QueryDisplay
+            <RecursiveCall
               initialQuery={['id']}
               type={'City'}
               outputFunction={outputFunction}
-              key={type}
               sub={true}
             />
           </div>
@@ -192,7 +192,7 @@ const QueryDisplay = (props) => {
       >
         <div className='plus-minus-icons'>
           <img src={Plus} />
-          <img src={PlusHover} class='hover-button' />
+          <img src={PlusHover} className='hover-button' />
         </div>
         {/* Where the plus dropdown appears on click */}
         {plusDropdown && <div className='dropdown-menu' ref={ref}>{dropdown}</div>}

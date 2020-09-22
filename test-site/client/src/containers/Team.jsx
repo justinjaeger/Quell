@@ -44,36 +44,38 @@ const rob = {
 
 const Team = () => {
   return (
-    <div id='team'>
+    <div>
       <img id='team-quell' src={Header}></img>
-      <TeamMember
-        src={nick.src}
-        bio={nick.bio}
-        name={nick.name}
-        linkedin={nick.linkedin}
-        github={nick.github}
-      />
-      <TeamMember
-        src={mike.src}
-        bio={mike.bio}
-        name={mike.name}
-        linkedin={mike.linkedin}
-        github={mike.github}
-      />
-      <TeamMember
-        src={rob.src}
-        bio={rob.bio}
-        name={rob.name}
-        linkedin={rob.linkedin}
-        github={rob.github}
-      />
-      <TeamMember
-        src={justin.src}
-        bio={justin.bio}
-        name={justin.name}
-        linkedin={justin.linkedin}
-        github={justin.github}
-      />
+      <div id='team-profiles'>
+        <TeamMember
+          src={nick.src}
+          bio={nick.bio}
+          name={nick.name}
+          linkedin={nick.linkedin}
+          github={nick.github}
+        />
+        <TeamMember
+          src={mike.src}
+          bio={mike.bio}
+          name={mike.name}
+          linkedin={mike.linkedin}
+          github={mike.github}
+        />
+        <TeamMember
+          src={rob.src}
+          bio={rob.bio}
+          name={rob.name}
+          linkedin={rob.linkedin}
+          github={rob.github}
+        />
+        <TeamMember
+          src={justin.src}
+          bio={justin.bio}
+          name={justin.name}
+          linkedin={justin.linkedin}
+          github={justin.github}
+        />
+      </div>
     </div>
   );
 };

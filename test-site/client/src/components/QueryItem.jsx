@@ -5,11 +5,11 @@ import MinusHover from '../images/buttons/minus-button-hover.svg';
 // component to get ALL data from our created DB
 const QueryItem = (props) => {
   const { item, deleteItem, sub } = props;
-  const [itemIsNotId, setItemIsNotId] = useState(true)
+  const [itemIsNotId, setItemIsNotId] = useState(true);
 
   useEffect(() => {
     if (item === 'id') setItemIsNotId(false)
-  }, [itemIsNotId])
+  }, [itemIsNotId]);
 
   const tab = <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>,
     space = <span>&nbsp;</span>;
