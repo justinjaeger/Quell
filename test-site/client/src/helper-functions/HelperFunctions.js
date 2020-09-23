@@ -6,6 +6,8 @@
  * @param {Object} currentResults - the last output of the function - looks like { countries: ['id', 'name', {'cities': ['id', 'name']}] }
 */
 
+// test comment
+
 /* 
   Used in Query and Demo
   
