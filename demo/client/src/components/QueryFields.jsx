@@ -21,7 +21,6 @@ const QueryFields = (props) => {
   const [availableList, setAvailableList] = useState([]);
   const [plusDropdown, togglePlusDropdown] = useState(false);
   const [subQuery, setSubQuery] = useState(sub); // is true when we render this recursively for the "cities" field inside "countries" query
-  const [citiesInitial, setCitiesInitial] = useState(['id'])
 
   // ====================================================================== //
   // ======= Functionality to close dropdowns when clicking outside ======= //
@@ -96,16 +95,12 @@ const QueryFields = (props) => {
   // ==================================== //
 
   //======= Minus button ========//
-  function deleteItem(item) { // THIS UNINTENTIONALLY RESETS CITIES
+  function deleteItem(item) {
     // remove item from queryList
     const newList = [...queryList];
     const index = newList.indexOf(item);
     newList.splice(index, 1);
     setQueryList(newList);
-    // if cities query, reset the initial list
-    if (sub) {
-      setCitiesInitial(['id'])
-    };
     // add item to availableList
     const newAvailableList = [...availableList];
     newAvailableList.push(item);
@@ -129,11 +124,6 @@ const QueryFields = (props) => {
     const index = newAvailablelist.indexOf(item);
     newAvailablelist.splice(index, 1);
     setAvailableList(newAvailablelist);
-    // if cities query, update the citiesInitial with the new list 
-    if (sub) {
-      const newCitiesInitial = [...newList];
-      setCitiesInitial(newCitiesInitial)
-    };
     // close the plus dropdown
     togglePlusDropdown(false);
     // call a function that prepares the query for actually being sent
@@ -180,7 +170,7 @@ const QueryFields = (props) => {
           </div>
           <div className='queryLine'>
             <QueryFields
-              initialQuery={citiesInitial}
+              initialQuery={['id']}
               type={'City'}
               outputFunction={outputFunction}
               key={type}
