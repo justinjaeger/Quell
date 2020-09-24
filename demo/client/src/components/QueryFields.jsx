@@ -13,14 +13,17 @@ import PlusHover from '../images/buttons/plus-button-hover.svg';
   - It is recursively called when you add the "cities" field in the "countries" query
 */
 
+// I don't know where in the file to set queryingCities equal to true so that it doesn't render ID after that
+
 const QueryFields = (props) => {
 
-  const { initialQuery: initialField, type, sub, outputFunction } = props; // import props
-
+  const { initialField, type, sub, outputFunction } = props; // import props
+  
   const [queryList, setQueryList] = useState(initialField);
   const [availableList, setAvailableList] = useState([]);
   const [plusDropdown, togglePlusDropdown] = useState(false);
   const [subQuery, setSubQuery] = useState(sub); // is true when we render this recursively for the "cities" field inside "countries" query
+  const [queryingCities, setQueryingCities] = useState(false)
 
   // ====================================================================== //
   // ======= Functionality to close dropdowns when clicking outside ======= //
@@ -95,7 +98,7 @@ const QueryFields = (props) => {
   // ==================================== //
 
   //======= Minus button ========//
-  function deleteItem(item) {
+  function deleteItem(item) { // THIS UNINTENTIONALLY RESETS CITIES
     // remove item from queryList
     const newList = [...queryList];
     const index = newList.indexOf(item);
@@ -154,7 +157,7 @@ const QueryFields = (props) => {
   // Render the query list to the DOM
   const queriedItems = queryList.map((item, i) => {
     // if querying "cities", need to open up a new pair of brackets and recursively call QueryFields to generate cities fields
-    if (item === 'cities') {
+    if (item === 'cities' && !sub) {
       return (
         <>
           <div className='queryLine'>
@@ -169,13 +172,25 @@ const QueryFields = (props) => {
             {space}cities{space}{ob} 
           </div>
           <div className='queryLine'>
+            {console.log('is sub true or false?', sub)}
+            {console.log('queryingCities?', queryingCities)}
+            {queryingCities &&
             <QueryFields
-              initialQuery={['id']}
               type={'City'}
               outputFunction={outputFunction}
-              key={type}
+              // key={type}
               sub={true}
             />
+            }
+            {!queryingCities &&
+              <QueryFields
+                initialField={['id']}
+                type={'City'}
+                outputFunction={outputFunction}
+                // key={type}
+                sub={true}
+              />
+            }
           </div>
           <div className='queryLine'>
             {tab}

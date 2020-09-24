@@ -168,7 +168,7 @@ const Query = (props) => {
       {/* Query fields are rendered here */}
       <div>
         <QueryFields
-          initialQuery={initialField}
+          initialField={initialField}
           type={type}
           outputFunction={outputFunction}
           key={type}
