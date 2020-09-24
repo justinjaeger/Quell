@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import QueryField from './QueryField';
-import DropdownItem from './DropdownItem';
-import CitiesFields from './CitiesFields';
+import QueryField from './QueryField.jsx';
+import DropdownItem from './DropdownItem.jsx';
 // imported images
 import Minus from '../images/buttons/minus-button.svg';
 import MinusHover from '../images/buttons/minus-button-hover.svg';
@@ -19,13 +18,12 @@ import PlusHover from '../images/buttons/plus-button-hover.svg';
 
 const QueryFields = (props) => {
 
-  const { initialField, type, sub, outputFunction } = props; // import props
+  const { citiesFields, type, sub, outputFunction, modifyCitiesFields } = props; // import props
   
-  const [queryList, setQueryList] = useState(['id']);
+  const [queryList, setQueryList] = useState(citiesFields);
   const [availableList, setAvailableList] = useState([]);
   const [plusDropdown, togglePlusDropdown] = useState(false);
   const [subQuery, setSubQuery] = useState(sub); // is true when we render this recursively for the "cities" field inside "countries" query
-  const [citiesFields, setCitiesFields] = useState(['id'])
 
   // ====================================================================== //
   // ======= Functionality to close dropdowns when clicking outside ======= //
@@ -88,9 +86,7 @@ const QueryFields = (props) => {
     });
     const noDuplicates = []; // get rid of potential duplicates
     output.forEach((el) => {
-      queryList.forEach((qEl) => {
-        if (el !== qEl) noDuplicates.push(el);
-      });
+      if (!queryList.includes(el)) noDuplicates.push(el)
     });
     return noDuplicates;
   };
@@ -101,6 +97,10 @@ const QueryFields = (props) => {
 
   //======= Minus button ========//
   function deleteItem(item) { // THIS UNINTENTIONALLY RESETS CITIES
+
+    // execute a function back in query fields to update list, which in turn will update this component
+    modifyCitiesFields(item, 'delete');
+
     // remove item from queryList
     const newList = [...queryList];
     const index = newList.indexOf(item);
@@ -120,6 +120,9 @@ const QueryFields = (props) => {
 
   //======= Plus button ========//
   function addItem(item) {
+
+    modifyCitiesFields(item, 'add');
+
     // add item to queryList
     const newList = [...queryList];
     newList.push(item);
@@ -137,20 +140,6 @@ const QueryFields = (props) => {
     } else {
       outputFunction(newList, 0, 0);
     }
-  }
-
-  // Add item to cities field
-  // Delete item from cities field
-  const modifyCitiesFields = (item, addOrDelete) => {
-    const newFields = [...citiesFields]
-    if (addOrDelete === 'add') {
-      newFields.push(item);
-    };
-    if (addOrDelete === 'delete') {
-      const index = newFields.indexOf(item);
-      newFields.splice(index, 1);
-    };
-    setCitiesFields(newFields)
   }
 
   // Fires when you click plus -- only show plus dropdown if there's something in the list
@@ -172,53 +161,6 @@ const QueryFields = (props) => {
 
   // Render the query list to the DOM
   const queriedItems = queryList.map((item, i) => {
-    // if querying "cities", need to open up a new pair of brackets and recursively call QueryFields to generate cities fields
-    if (item === 'cities' && !sub) {
-      return (
-        <>
-          <div className='queryLine'>
-            {tab}
-            {tab}
-            <button className='minus-button' onClick={() => deleteItem(item)}>
-              <div className='plus-minus-icons'>
-                <img src={Minus} />
-                <img src={MinusHover} className='hover-button' />
-              </div>
-            </button>
-            {space}cities{space}{ob} 
-          </div>
-          <div className='queryLine'>
-            <CitiesFields
-              citiesFields = {citiesFields}
-              type={'City'}
-              outputFunction={outputFunction}
-              sub={true}
-              modifyCitiesFields={modifyCitiesFields}
-            />
-            {/* {queryingCities &&
-            <QueryFields
-              type={'City'}
-              outputFunction={outputFunction}
-              sub={true}
-            />
-            }
-            {!queryingCities &&
-              <QueryFields
-                type={'City'}
-                outputFunction={outputFunction}
-                sub={true}
-              />
-            } */}
-          </div>
-          <div className='queryLine'>
-            {tab}
-            {tab}
-            {cb}
-          </div>
-        </>
-      );
-    }
-    // else (what normally happens)
     return (
       <QueryField
         item={item}
