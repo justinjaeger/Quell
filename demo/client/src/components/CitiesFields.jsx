@@ -47,16 +47,14 @@ const QueryFields = (props) => {
     };
   }, [])
 
-  // ========================================================== //
-  // ======= Functionality to initialize dropdowns, etc ======= //
-  // ========================================================== //
+  // =================================== //
+  // ======= Other functionality ======= //
+  // =================================== //
 
   // initializes the available fields list based on the initialField prop
   useEffect(() => {
-    setAvailableList(initialAvailableList());
+    setAvailableList(convertIntoList(cityFields));
   }, []);
-
-  // ====== Lists of Fields ====== //
 
   const cityFields = [
     { country_id: "string" },
@@ -64,19 +62,6 @@ const QueryFields = (props) => {
     { name: "string" },
     { population: "string" },
   ];
-
-  const countryFields = [
-    // { id: "string" },
-    { name: "string" },
-    { capital: "string" },
-    { cities: cityFields }, // if field is array, point to the list of fields
-  ];
-
-  // decides whether to populate dropdowns with Country or City fields, based on type prop
-  const initialAvailableList = () => {
-    if (type === 'Country') return convertIntoList(countryFields);
-    if (type === 'City') return convertIntoList(cityFields);
-  };
 
   // Takes the items list and returns something like: [ id, name, capital, cities ]
   const convertIntoList = (itemList) => {
@@ -96,7 +81,7 @@ const QueryFields = (props) => {
   // ==================================== //
 
   //======= Minus button ========//
-  function deleteItem(item) { // THIS UNINTENTIONALLY RESETS CITIES
+  function deleteItem(item) {
 
     // execute a function back in query fields to update list, which in turn will update this component
     modifyCitiesFields(item, 'delete');
