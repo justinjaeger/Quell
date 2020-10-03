@@ -31,7 +31,7 @@ const Demo = () => {
   const handleRunQueryClick = () => {
     // run ResultsParser on output to get the query
     const parsedResult = CreateQueryStr(output);
-
+    console.log('PARSED RESULT', parsedResult)
     // start the timer (eventually displayed in Metrics)
     let startTime, endTime;
     startTime = performance.now();
